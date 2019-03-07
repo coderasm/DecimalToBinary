@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecimalToBinary
 {
@@ -10,12 +8,26 @@ namespace DecimalToBinary
   {
     static void Main(string[] args)
     {
-      // The code provided will print ‘Hello World’ to the console.
-      // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-      Console.WriteLine("Hello World!");
+      var entry = "";
+      var parsed = false;
+      var number = 0;
+      do
+      {
+        Console.Write("Enter an integer: ");
+        entry = Console.ReadLine();
+        parsed = int.TryParse(entry, out number);
+      } while (!parsed);
+      var quotient = number;
+      List<int> remainders = new List<int>();
+      do
+      {
+        remainders.Add(quotient % 2);
+        quotient /= 2;
+      } while (quotient != 0);
+      remainders.Reverse();
+      var binary = string.Join("", remainders.ToArray());
+      Console.WriteLine($"Decimal: {number}, Binary: {binary}");
       Console.ReadKey();
-
-      // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
     }
   }
 }
